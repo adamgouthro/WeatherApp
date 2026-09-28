@@ -31,7 +31,7 @@ import com.example.weatherapp.ui.theme.Purple40
 import java.nio.file.WatchEvent
 
 @Composable
-fun CurrentForecast(innerPadding: PaddingValues)
+fun CurrentForecast()
 {
 
     //data class Weather(

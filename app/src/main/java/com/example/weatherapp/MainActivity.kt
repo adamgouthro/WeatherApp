@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.weatherapp.models.Weather
 import com.example.weatherapp.models.WeeklyForecast
+import com.example.weatherapp.ui.Navigation
 import com.example.weatherapp.ui.screens.CurrentForecast
 import com.example.weatherapp.ui.screens.CurrentForecast
 import com.example.weatherapp.ui.screens.Forecast
@@ -25,17 +26,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             WeatherAppTheme {
-                Scaffold() { innerPadding ->
-
-//                    CurrentForecast(innerPadding)
-
-                    Forecast(innerPadding);
-
-
-
+                Navigation()
                 }
             }
         }
     }
-}
+
 

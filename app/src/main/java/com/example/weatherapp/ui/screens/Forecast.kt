@@ -34,7 +34,7 @@ import com.example.weatherapp.models.WeeklyForecast
 import com.example.weatherapp.ui.theme.LightBlue40
 
 @Composable
-fun Forecast(innerPadding: PaddingValues)
+fun Forecast()
 {
     val forecastList = listOf(
         WeeklyForecast(
