@@ -15,10 +15,12 @@ import androidx.compose.foundation.layout.paddingFrom
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
@@ -53,8 +55,10 @@ fun CurrentForecast()
         currentLow = 28,
         feelLike = 34,
         location = "Halifax, Nova Scotia",
-        chanceOfRain = 0,
-        amountOfRain = 0
+        chanceOfRain = 10,
+        amountOfRain = 1,
+        chanceOfSnow = 0,
+        amountOfSnow = 0,
     )
 
     Column(modifier = Modifier
@@ -64,12 +68,6 @@ fun CurrentForecast()
             horizontalAlignment = Alignment.CenterHorizontally
         )
     {
-
-        Row(modifier = Modifier.padding(top = 25.dp))
-            {
-                Text(currentWeather.location,
-                    fontSize = 25.sp)
-            }
 
         Row(
             modifier = Modifier.padding(50.dp)
@@ -84,11 +82,8 @@ fun CurrentForecast()
         // Column and rows for
 
         Column(modifier = Modifier.fillMaxWidth()
-                .border
-                (
-                border = BorderStroke(width = 5.dp, color = Color.Black),
-                shape = RectangleShape
-                )
+                .clip(RoundedCornerShape((10.dp)))
+                .background(color = Color.White)
                 .padding(vertical = 20.dp)
                 ,
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -121,11 +116,8 @@ fun CurrentForecast()
             Column(modifier = Modifier
                 .padding(vertical = 10.dp)
                 .padding(end = 5.dp)
-                .border
-                    (
-                    border = BorderStroke(width = 5.dp, color = Color.Black),
-                    shape = RectangleShape
-                )
+                .clip(RoundedCornerShape((10.dp)))
+                .background(color = Color.White)
                 .padding(vertical = 10.dp)
                 .weight(1f)
                 ,
@@ -140,11 +132,8 @@ fun CurrentForecast()
             Column(modifier = Modifier
                 .padding(vertical = 10.dp)
                 .padding(start = 5.dp)
-                .border
-                    (
-                    border = BorderStroke(width = 5.dp, color = Color.Black),
-                    shape = RectangleShape
-                )
+                .clip(RoundedCornerShape((10.dp)))
+                .background(color = Color.White)
                 .padding(vertical = 10.dp)
                 .weight(1f)
                 ,

@@ -9,6 +9,8 @@ data class Weather(
     val feelLike: Int, // feels like temperature
     val location: String, // Temperatures location
     val chanceOfRain: Int, // chance of rain happening for today
-    val amountOfRain: Int, // amount of rain they/re getting
+    val amountOfRain: Int, // amount of rain they/re getting in mm
+    val chanceOfSnow: Int, // percentage
+    val amountOfSnow: Int, // in cm
     @DrawableRes val resourceId: Int // ID for drawable image
     )

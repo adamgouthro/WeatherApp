@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.ViewWeek
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -27,6 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.weatherapp.ui.screens.CurrentForecast
 import com.example.weatherapp.ui.screens.Forecast
 import com.example.weatherapp.ui.theme.LightBlue40
+import com.example.weatherapp.ui.theme.fontNunito
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -43,8 +45,7 @@ fun Navigation() {
                     titleContentColor = Color.Black,
                 ),
                 title = {
-                    Text("Halifax, Nova Scotia")
-
+                    Text("Halifax, Nova Scotia", fontFamily = fontNunito)
                 }
             )
         },
@@ -52,11 +53,12 @@ fun Navigation() {
             NavigationBar(windowInsets = NavigationBarDefaults.windowInsets,
                 containerColor = LightBlue40,
                 contentColor = Color.Black)
+
             {
                 // NavigationBarItem()
                 NavigationBarItem(
                     icon = { Icon(imageVector = Icons.Default.Home, contentDescription = "Search") },
-                    label = { Text("Home") },
+                    label = { Text("Home", fontFamily = fontNunito) },
                     selected = selectedIndex == 0,
                     onClick = {
                         selectedIndex = 0
@@ -71,8 +73,8 @@ fun Navigation() {
                 )
 
                 NavigationBarItem(
-                    icon = { Icon(imageVector = Icons.Default.CalendarMonth, contentDescription = "Search") },
-                    label = { Text("Week") },
+                    icon = { Icon(imageVector = Icons.Default.ViewWeek, contentDescription = "Search") },
+                    label = { Text("Week", fontFamily = fontNunito) },
                     selected = selectedIndex == 1,
                     onClick = {
                         selectedIndex = 1
