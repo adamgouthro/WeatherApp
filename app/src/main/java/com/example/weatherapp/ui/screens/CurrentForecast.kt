@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -21,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
@@ -59,10 +61,14 @@ fun CurrentForecast()
         amountOfRain = 1,
         chanceOfSnow = 0,
         amountOfSnow = 0,
+        wind = 20,
+        windDirection = "E",
+        uvIndex = "Moderate",
+        humidity = 60,
     )
 
     Column(modifier = Modifier
-        .background(color = LightBlue40)
+        .background(color = Color.White)
         .padding(10.dp) // padding around the entire screen
         .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -83,8 +89,9 @@ fun CurrentForecast()
 
         Column(modifier = Modifier.fillMaxWidth()
                 .clip(RoundedCornerShape((10.dp)))
-                .background(color = Color.White)
-                .padding(vertical = 20.dp)
+                .background(color = LightBlue40.copy(alpha = 0.7f)) // making transparent
+                .shadow(-1.dp, ambientColor = Color.Black) // working on box shadow
+                .padding(vertical = 30.dp)
                 ,
                 horizontalAlignment = Alignment.CenterHorizontally,
             )
@@ -95,14 +102,16 @@ fun CurrentForecast()
             {
                 Text(
                     "${currentWeather.currentTemperature}°C",
-                    fontSize = 60.sp
+                    fontSize = 60.sp,
+                    color = Color.White
                 )
             }
 
-            Row(modifier = Modifier.padding(20.dp))
+            Row(modifier = Modifier)
             {
                 Text("Feels Like ${currentWeather.feelLike}°C",
-                    fontSize = 20.sp)
+                    fontSize = 20.sp,
+                    color = Color.White)
             }
 
         }
@@ -117,7 +126,7 @@ fun CurrentForecast()
                 .padding(vertical = 10.dp)
                 .padding(end = 5.dp)
                 .clip(RoundedCornerShape((10.dp)))
-                .background(color = Color.White)
+                .background(color = LightBlue40)
                 .padding(vertical = 10.dp)
                 .weight(1f)
                 ,
@@ -126,14 +135,15 @@ fun CurrentForecast()
             )
             {
                 Text("High of ${currentWeather.currentHigh}°C",
-                    fontSize = 20.sp)
+                    fontSize = 20.sp,
+                    color = Color.White)
             }
 
             Column(modifier = Modifier
                 .padding(vertical = 10.dp)
                 .padding(start = 5.dp)
                 .clip(RoundedCornerShape((10.dp)))
-                .background(color = Color.White)
+                .background(color = LightBlue40)
                 .padding(vertical = 10.dp)
                 .weight(1f)
                 ,
@@ -141,10 +151,49 @@ fun CurrentForecast()
             )
             {
                 Text("Low of ${currentWeather.currentLow}°C",
-                    fontSize = 20.sp)
+                    fontSize = 20.sp,
+                    color = Color.White)
             }
         }
 
-    }
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+            .clip(RoundedCornerShape((10.dp)))
+            .background(color = LightBlue40)
+            .padding(vertical = 10.dp)
+            ,
+            horizontalArrangement = Arrangement.Absolute.SpaceAround
+            )
+        {
+            Column() {
+                Text("Wind: ",
+                    fontSize = 20.sp,
+                    color = Color.White)
 
-}
+                Text("Humidity: ",
+                    fontSize = 20.sp,
+                    color = Color.White)
+
+                Text("UV: ",
+                    fontSize = 20.sp,
+                    color = Color.White)
+            }
+
+            Column() {
+                Text("${currentWeather.wind}km/h ${currentWeather.windDirection}",
+                    fontSize = 20.sp,
+                    color = Color.White)
+
+                Text("${currentWeather.humidity}%",
+                    fontSize = 20.sp,
+                    color = Color.White)
+
+                Text(currentWeather.uvIndex,
+                    fontSize = 20.sp,
+                    color = Color.White)}
+            }
+
+        }
+
+    }

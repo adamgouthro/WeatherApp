@@ -12,5 +12,9 @@ data class Weather(
     val amountOfRain: Int, // amount of rain they/re getting in mm
     val chanceOfSnow: Int, // percentage
     val amountOfSnow: Int, // in cm
+    val wind: Int, // in km/h
+    val windDirection: String, // example "E" for east
+    val humidity: Int, // out of 100 percent
+    val uvIndex: String, // example low, moderate, high
     @DrawableRes val resourceId: Int // ID for drawable image
     )

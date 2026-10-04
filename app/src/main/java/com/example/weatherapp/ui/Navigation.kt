@@ -41,7 +41,7 @@ fun Navigation() {
         topBar = {
             TopAppBar(
                 colors = topAppBarColors(
-                    containerColor = LightBlue40,
+                    containerColor = Color.White,
                     titleContentColor = Color.Black,
                 ),
                 title = {
@@ -51,7 +51,7 @@ fun Navigation() {
         },
         bottomBar = {
             NavigationBar(windowInsets = NavigationBarDefaults.windowInsets,
-                containerColor = LightBlue40,
+                containerColor = Color.White,
                 contentColor = Color.Black)
 
             {

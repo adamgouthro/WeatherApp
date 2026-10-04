@@ -122,7 +122,7 @@ fun Forecast()
 
     LazyColumn(
         modifier = Modifier
-            .background(color = LightBlue40)
+            .background(color = Color.White)
             .padding(20.dp)
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -134,10 +134,11 @@ fun Forecast()
                     .fillMaxWidth()
                     .padding(vertical = 10.dp)
                     .clip(RoundedCornerShape((10.dp)))
-                    .background(color = Color.White)
+                    .background(color = LightBlue40)
                     .padding(vertical = 20.dp)) {
 
-                Text(WeeklyForecast.day)
+                Text(WeeklyForecast.day,
+                    color = Color.White)
 
 
                 Column(modifier = Modifier) {
@@ -154,25 +155,19 @@ fun Forecast()
                     horizontalAlignment = Alignment.CenterHorizontally) {
 
                     Text("${WeeklyForecast.currentTemperature}°C", fontWeight = FontWeight.Bold,
-                        fontSize = 25.sp)
+                        fontSize = 25.sp, color = Color.White)
 
                 }
 
                 // maybe separate rows into columns too
                 Column() {
                     Row() {
-                        Text("High: ${WeeklyForecast.currentHigh}°C")
+                        Text("High: ${WeeklyForecast.currentHigh}°C"
+                            , color = Color.White)
                     }
                     Row() {
-                        Text("Low: ${WeeklyForecast.currentLow}°C")
-                    }
-                    Row() {
-                        Image(
-                            painter = painterResource(id = R.drawable.rainy),
-                            contentDescription = "Weather",
-                            modifier = Modifier.size(20.dp)
-                        )
-                        Text("${WeeklyForecast.chanceOfRain}%")
+                        Text("Low: ${WeeklyForecast.currentLow}°C"
+                            , color = Color.White)
                     }
                     Row() {
                         Image(
@@ -180,7 +175,17 @@ fun Forecast()
                             contentDescription = "Weather",
                             modifier = Modifier.size(20.dp)
                         )
-                        Text("${WeeklyForecast.amountOfRain}mm")
+                        Text("${WeeklyForecast.chanceOfRain}%"
+                            , color = Color.White)
+                    }
+                    Row() {
+                        Image(
+                            painter = painterResource(id = R.drawable.rainy),
+                            contentDescription = "Weather",
+                            modifier = Modifier.size(20.dp)
+                        )
+                        Text("${WeeklyForecast.amountOfRain}mm"
+                            , color = Color.White)
                     }
                 }
 
