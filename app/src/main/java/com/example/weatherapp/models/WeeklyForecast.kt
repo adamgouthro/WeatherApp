@@ -11,6 +11,10 @@ data class WeeklyForecast(
     val day: String, // day of the week
     val chanceOfRain: Int, // chance of rain happening for today
     val amountOfRain: Int, // amount of rain they/re getting
+    val chanceOfSnow: Int, // percentage
+    val amountOfSnow: Int, // in cm
+    val wind: Int, // in km/h
+    val windDirection: String, // example "E" for east
     @DrawableRes val resourceId: Int // ID for drawable image
 
 )

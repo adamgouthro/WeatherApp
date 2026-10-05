@@ -6,6 +6,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.transformable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -48,6 +49,10 @@ fun Forecast()
             day = "Sunday",
             chanceOfRain = 0,
             amountOfRain = 0,
+            amountOfSnow = 0,
+            chanceOfSnow = 0,
+            wind = 5,
+            windDirection = "W",
             resourceId = R.drawable.sun
         ),
         WeeklyForecast(
@@ -59,6 +64,10 @@ fun Forecast()
             day = "Monday",
             chanceOfRain = 0,
             amountOfRain = 0,
+            amountOfSnow = 0,
+            chanceOfSnow = 0,
+            wind = 5,
+            windDirection = "W",
             resourceId = R.drawable.sunnyovercast
         ),
         WeeklyForecast(
@@ -70,6 +79,10 @@ fun Forecast()
             day = "Tuesday",
             chanceOfRain = 0,
             amountOfRain = 0,
+            amountOfSnow = 0,
+            chanceOfSnow = 0,
+            wind = 5,
+            windDirection = "W",
             resourceId = R.drawable.overcast
         ),
         WeeklyForecast(
@@ -81,6 +94,10 @@ fun Forecast()
             day = "Wednesday",
             chanceOfRain = 100,
             amountOfRain = 10,
+            amountOfSnow = 0,
+            chanceOfSnow = 0,
+            wind = 5,
+            windDirection = "W",
             resourceId = R.drawable.rainy
         ),
         WeeklyForecast(
@@ -92,6 +109,10 @@ fun Forecast()
             day = "Thursday",
             chanceOfRain = 100,
             amountOfRain = 15,
+            amountOfSnow = 1,
+            chanceOfSnow = 10,
+            wind = 5,
+            windDirection = "W",
             resourceId = R.drawable.rainy
         ),
         WeeklyForecast(
@@ -103,6 +124,10 @@ fun Forecast()
             day = "Friday",
             chanceOfRain = 0,
             amountOfRain = 0,
+            amountOfSnow = 0,
+            chanceOfSnow = 0,
+            wind = 5,
+            windDirection = "W",
             resourceId = R.drawable.sun
         ),
         WeeklyForecast(
@@ -114,6 +139,10 @@ fun Forecast()
             day = "Saturday",
             chanceOfRain = 0,
             amountOfRain = 0,
+            amountOfSnow = 0,
+            chanceOfSnow = 0,
+            wind = 5,
+            windDirection = "W",
             resourceId = R.drawable.sun
         )
     )
@@ -127,7 +156,7 @@ fun Forecast()
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        items(forecastList) { WeeklyForecast ->
+        items(forecastList) { ForecastCard ->
 
             Row(horizontalArrangement = Arrangement.SpaceEvenly,
                 modifier = Modifier
@@ -135,58 +164,93 @@ fun Forecast()
                     .padding(vertical = 10.dp)
                     .clip(RoundedCornerShape((10.dp)))
                     .background(color = LightBlue40)
-                    .padding(vertical = 20.dp)) {
-
-                Text(WeeklyForecast.day,
-                    color = Color.White)
+                    .padding(vertical = 10.dp)) {
 
 
-                Column(modifier = Modifier) {
-                    Image(
-                    painter = painterResource(id = WeeklyForecast.resourceId),
-                    contentDescription = "Weather",
-                        modifier = Modifier
-                            .size(100.dp)
-                            .padding(15.dp)
-                    )
+
+                Column(modifier = Modifier.padding(1.dp).weight(1.5f),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+
+                    Text(ForecastCard.day,
+                        color = Color.White)
+
+
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+
+                        Image(
+                            painter = painterResource(id = ForecastCard.resourceId),
+                            contentDescription = "Weather",
+                            modifier = Modifier
+                                .size(100.dp)
+                                .padding(10.dp)
+                        )
+
+
+                        Text("${ForecastCard.currentTemperature}°C", fontWeight = FontWeight.Bold,
+                            fontSize = 30.sp, color = Color.White)
+
+                    }
+
                 }
 
-                Column(modifier = Modifier.fillMaxHeight(), verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally) {
-
-                    Text("${WeeklyForecast.currentTemperature}°C", fontWeight = FontWeight.Bold,
-                        fontSize = 25.sp, color = Color.White)
-
-                }
+//                Column(modifier = Modifier.fillMaxHeight().weight(1f), verticalArrangement = Arrangement.Center,
+//                    horizontalAlignment = Alignment.CenterHorizontally) {
+//
+//                    Text("${ForecastCard.currentTemperature}°C", fontWeight = FontWeight.Bold,
+//                        fontSize = 25.sp, color = Color.White)
+//
+//                }
 
                 // maybe separate rows into columns too
-                Column() {
+                Column(modifier = Modifier.weight(1f),
+                    horizontalAlignment = Alignment.Start) {
                     Row() {
-                        Text("High: ${WeeklyForecast.currentHigh}°C"
-                            , color = Color.White)
+                        Text("High: ${ForecastCard.currentHigh}°C"
+                            , color = Color.White,
+                            fontSize = 15.sp)
                     }
                     Row() {
-                        Text("Low: ${WeeklyForecast.currentLow}°C"
-                            , color = Color.White)
-                    }
-                    Row() {
-                        Image(
-                            painter = painterResource(id = R.drawable.rainy),
-                            contentDescription = "Weather",
-                            modifier = Modifier.size(20.dp)
-                        )
-                        Text("${WeeklyForecast.chanceOfRain}%"
-                            , color = Color.White)
+                        Text("Low: ${ForecastCard.currentLow}°C"
+                            , color = Color.White, fontSize = 15.sp
+                          )
                     }
                     Row() {
                         Image(
                             painter = painterResource(id = R.drawable.rainy),
                             contentDescription = "Weather",
-                            modifier = Modifier.size(20.dp)
+                            modifier = Modifier.padding(end = 5.dp)
+                                .size(20.dp)
                         )
-                        Text("${WeeklyForecast.amountOfRain}mm"
+
+                        if (ForecastCard.chanceOfRain != 0) {
+                            Text("${ForecastCard.chanceOfRain}% - ${ForecastCard.amountOfRain}mm",
+                                color = Color.White,fontSize = 15.sp)
+                        } else {
+                            Text("0%",
+                                color = Color.White, fontSize = 15.sp)
+                        }
+
+                    }
+                    Row() {
+                        if (ForecastCard.chanceOfSnow != 0) {
+                            Image(
+                                painter = painterResource(id = R.drawable.snowy),
+                                contentDescription = "Weather",
+                                modifier = Modifier.padding(end = 5.dp).size(20.dp)
+                            )
+                            Text("${ForecastCard.chanceOfSnow}% - ${ForecastCard.amountOfSnow}cm",
+                                color = Color.White, fontSize = 15.sp)
+                        } else {
+
+                        }
+                    }
+                    Row() {
+                        Text("Wind: ${ForecastCard.wind}km/h ${ForecastCard.windDirection}"
                             , color = Color.White)
                     }
+
+
                 }
 
             }

@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.sp
 import com.example.weatherapp.R
 import com.example.weatherapp.models.Weather
 import com.example.weatherapp.ui.theme.LightBlue40
+import com.example.weatherapp.ui.theme.Purple
 import com.example.weatherapp.ui.theme.Purple40
 import java.nio.file.WatchEvent
 
@@ -85,12 +86,11 @@ fun CurrentForecast()
                 )
             }
 
-        // Column and rows for
+        // to make transparent for later .copy(alpha = 0.7f) example
 
-        Column(modifier = Modifier.fillMaxWidth()
+            Column(modifier = Modifier.fillMaxWidth()
                 .clip(RoundedCornerShape((10.dp)))
-                .background(color = LightBlue40.copy(alpha = 0.7f)) // making transparent
-                .shadow(-1.dp, ambientColor = Color.Black) // working on box shadow
+                .background(color = LightBlue40)
                 .padding(vertical = 30.dp)
                 ,
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -178,6 +178,14 @@ fun CurrentForecast()
                 Text("UV: ",
                     fontSize = 20.sp,
                     color = Color.White)
+
+                Text("Rain: ",
+                    fontSize = 20.sp,
+                    color = Color.White)
+
+                Text("Snow: ",
+                    fontSize = 20.sp,
+                    color = Color.White)
             }
 
             Column() {
@@ -191,9 +199,32 @@ fun CurrentForecast()
 
                 Text(currentWeather.uvIndex,
                     fontSize = 20.sp,
-                    color = Color.White)}
-            }
+                    color = Color.White)
 
+                // if there's a chance of rain it'll display both chance and amount. otherwise just 0%
+                if (currentWeather.chanceOfRain != 0) {
+                    Text("${currentWeather.chanceOfRain}% - ${currentWeather.amountOfRain}mm",
+                        fontSize = 20.sp,
+                        color = Color.White)
+                } else {
+                    Text("0%",
+                        fontSize = 20.sp,
+                        color = Color.White)
+                }
+
+                if (currentWeather.chanceOfSnow != 0) {
+                    Text("${currentWeather.chanceOfSnow}% - ${currentWeather.amountOfSnow}cm",
+                        fontSize = 20.sp,
+                        color = Color.White)
+                } else {
+                    Text("0%",
+                        fontSize = 20.sp,
+                        color = Color.White)
+                }
+
+            }
         }
 
     }
+
+}
