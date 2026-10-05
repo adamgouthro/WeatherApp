@@ -1,9 +1,8 @@
 package com.example.weatherapp.ui
 
-import android.R
+
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.ViewWeek
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -22,16 +21,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import androidx.core.view.WindowCompat
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.weatherapp.ui.screens.CurrentForecast
 import com.example.weatherapp.ui.screens.Forecast
-import com.example.weatherapp.ui.theme.LightBlue40
-import com.example.weatherapp.ui.theme.LightYellow40
 import com.example.weatherapp.ui.theme.fontNunito
 
 @OptIn(ExperimentalMaterial3Api::class)
