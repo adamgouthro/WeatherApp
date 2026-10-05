@@ -1,5 +1,6 @@
 package com.example.weatherapp.ui
 
+import android.R
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarMonth
@@ -21,6 +22,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.core.view.WindowCompat
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -28,6 +31,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.weatherapp.ui.screens.CurrentForecast
 import com.example.weatherapp.ui.screens.Forecast
 import com.example.weatherapp.ui.theme.LightBlue40
+import com.example.weatherapp.ui.theme.LightYellow40
 import com.example.weatherapp.ui.theme.fontNunito
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -37,32 +41,38 @@ fun Navigation() {
     val navController = rememberNavController()
     var selectedIndex by remember { mutableIntStateOf(0) } // default set to 0
 
+
+
     Scaffold(
+//        containerColor = Color.Transparent,
         topBar = {
             TopAppBar(
                 colors = topAppBarColors(
                     containerColor = Color.White,
                     titleContentColor = Color.Black,
                 ),
+
                 title = {
                     Text("Halifax, Nova Scotia", fontFamily = fontNunito)
                 }
             )
         },
+
         bottomBar = {
             NavigationBar(windowInsets = NavigationBarDefaults.windowInsets,
                 containerColor = Color.White,
-                contentColor = Color.Black)
+                contentColor = Color.White
+            )
 
             {
                 // NavigationBarItem()
                 NavigationBarItem(
                     icon = { Icon(imageVector = Icons.Default.Home, contentDescription = "Search") },
-                    label = { Text("Home", fontFamily = fontNunito) },
+                    label = { Text("Today", fontFamily = fontNunito) },
                     selected = selectedIndex == 0,
                     onClick = {
                         selectedIndex = 0
-                        navController.navigate(route="home"){
+                        navController.navigate(route="today"){
                             popUpTo(navController.graph.findStartDestination().id) {
                                 saveState = true
                             }
@@ -84,26 +94,10 @@ fun Navigation() {
                             }
                             launchSingleTop = true
                             restoreState = true
+
                         }
                     }
                 )
-
-//                NavigationBarItem(
-//                    icon = { Icon(imageVector = Icons.Default.Timer, contentDescription = "Search") },
-//                    label = { Text("Hourly") },
-//                    selected = selectedIndex == 2,
-//                    onClick = {
-//                        selectedIndex = 2
-//                        navController.navigate(route="hourly"){
-//                            popUpTo(navController.graph.findStartDestination().id) {
-//                                saveState = true
-//                            }
-//                            launchSingleTop = true
-//                            restoreState = true
-//                        }
-//                    }
-//                )
-
 
             }
         }
@@ -111,10 +105,10 @@ fun Navigation() {
 
         NavHost(
             navController = navController,
-            startDestination = "home",
+            startDestination = "today",
             modifier = Modifier.padding(innerPadding)
         ) {
-            composable(route = "home") {
+            composable(route = "today") {
                CurrentForecast()
             }
             composable(route = "week") {
