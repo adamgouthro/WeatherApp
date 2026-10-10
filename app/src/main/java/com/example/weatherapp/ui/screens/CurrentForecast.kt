@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -16,7 +17,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -60,7 +63,7 @@ fun CurrentForecast()
     )
 
     Column(modifier = Modifier
-//        .paint(painterResource(id = R.drawable.weatherappbg), contentScale = ContentScale.FillBounds)
+//        .paint(painterResource(id = R.drawable.bgcold), contentScale = ContentScale.FillBounds)
         .background(color = Color.White)
         .padding(10.dp)
         .fillMaxSize()
@@ -69,39 +72,43 @@ fun CurrentForecast()
         )
     {
 
-        Row(horizontalArrangement = Arrangement.Center, modifier = Modifier
-            .clip(RoundedCornerShape((10.dp)))
-            .background(color = LightYellow40)
-            .padding(5.dp)
-            .padding(horizontal = 15.dp)) {
-            Text("Today's Weather",
+        Row(
+            horizontalArrangement = Arrangement.Center, modifier = Modifier
+                .clip(RoundedCornerShape((10.dp)))
+                .background(color = LightYellow40)
+                .padding(5.dp)
+                .padding(horizontal = 15.dp)
+        ) {
+            Text(
+                "Today's Weather",
                 color = Color.White,
-                fontWeight = FontWeight.Bold)
+                fontWeight = FontWeight.Bold
+            )
         }
 
         Row(
             modifier = Modifier.padding(25.dp)
         )
-            {
-                Image(
-                    painter = painterResource(id = currentWeather.resourceId),
-                    contentDescription = "Weather",
-                    modifier = Modifier.size(200.dp)
-                )
-            }
+        {
+            Image(
+                painter = painterResource(id = currentWeather.resourceId),
+                contentDescription = "Weather",
+                modifier = Modifier.size(200.dp)
+            )
+        }
 
         // to make transparent for later .copy(alpha = 0.7f) example
 
-            Column(modifier = Modifier
+        Column(
+            modifier = Modifier
                 .fillMaxWidth()
                 .clip(RoundedCornerShape((10.dp)))
                 .background(color = LightBlue40)
-                .padding(vertical = 30.dp)
-                ,
-                horizontalAlignment = Alignment.CenterHorizontally,
-            )
+                .padding(vertical = 30.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        )
 
-            {
+        {
 
             Row()
             {
@@ -114,71 +121,85 @@ fun CurrentForecast()
 
             Row(modifier = Modifier)
             {
-                Text("Feels Like ${currentWeather.feelLike}°C",
+                Text(
+                    "Feels Like ${currentWeather.feelLike}°C",
                     fontSize = 20.sp,
-                    color = Color.White)
+                    color = Color.White
+                )
             }
 
         }
 
-        Row(horizontalArrangement = Arrangement.SpaceAround,
-                modifier = Modifier.fillMaxWidth()
-            ) {
+        Row(
+            horizontalArrangement = Arrangement.SpaceAround,
+            modifier = Modifier.fillMaxWidth()
+        ) {
 
-            Column(modifier = Modifier
-                .padding(vertical = 10.dp)
-                .padding(end = 5.dp)
-                .clip(RoundedCornerShape((10.dp)))
-                .background(color = LightBlue40)
-                .padding(vertical = 10.dp)
-                .weight(1f)
-                ,
+            Column(
+                modifier = Modifier
+                    .padding(vertical = 10.dp)
+                    .padding(end = 5.dp)
+                    .clip(RoundedCornerShape((10.dp)))
+                    .background(color = LightBlue40)
+                    .padding(vertical = 10.dp)
+                    .weight(1f),
                 horizontalAlignment = Alignment.CenterHorizontally,
 
-            )
+                )
             {
-                Text("High of ${currentWeather.currentHigh}°C",
+                Text(
+                    "High of ${currentWeather.currentHigh}°C",
                     fontSize = 20.sp,
-                    color = Color.White)
+                    color = Color.White
+                )
             }
 
-            Column(modifier = Modifier
-                .padding(vertical = 10.dp)
-                .padding(start = 5.dp)
-                .clip(RoundedCornerShape((10.dp)))
-                .background(color = LightBlue40)
-                .padding(vertical = 10.dp)
-                .weight(1f)
-                ,
+            Column(
+                modifier = Modifier
+                    .padding(vertical = 10.dp)
+                    .padding(start = 5.dp)
+                    .clip(RoundedCornerShape((10.dp)))
+                    .background(color = LightBlue40)
+                    .padding(vertical = 10.dp)
+                    .weight(1f),
                 horizontalAlignment = Alignment.CenterHorizontally,
             )
             {
-                Text("Low of ${currentWeather.currentLow}°C",
+                Text(
+                    "Low of ${currentWeather.currentLow}°C",
                     fontSize = 20.sp,
-                    color = Color.White)
+                    color = Color.White
+                )
             }
         }
 
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight()
-            .clip(RoundedCornerShape((10.dp)))
-            .background(color = LightBlue40)
-            .padding(vertical = 10.dp)
-            ,
+        // BOTTOM ROW TO HOLD LOTS OF INFO
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight() // <- Change to fillmaxheight if i remove the transparent bottom navbar
+                .clip(RoundedCornerShape((10.dp)))
+                .background(color = LightBlue40)
+                .padding(vertical = 10.dp),
             horizontalArrangement = Arrangement.Absolute.SpaceAround,
             verticalAlignment = Alignment.CenterVertically
-            )
+        )
         {
-            Column(horizontalAlignment = Alignment.Start, modifier = Modifier
-                .weight(2f)
-                .padding(start = 10.dp)) {
+            Column(
+                horizontalAlignment = Alignment.Start, modifier = Modifier
+                    .weight(2f)
+                    .padding(start = 10.dp)
+            ) {
 
                 Row(verticalAlignment = Alignment.CenterVertically)
                 {
-                    Image(painter = painterResource(id = R.drawable.windycolor),
+                    Image(
+                        painter = painterResource(id = R.drawable.windycolor),
                         contentDescription = "Wind",
-                        modifier = Modifier.size(25.dp).padding(end=7.dp))
+                        modifier = Modifier
+                            .size(25.dp)
+                            .padding(end = 7.dp)
+                    )
 
                     Text(
                         "Wind: ",
@@ -190,9 +211,13 @@ fun CurrentForecast()
                 Row(verticalAlignment = Alignment.CenterVertically)
                 {
 
-                    Image(painter = painterResource(id = R.drawable.humiditycolor),
+                    Image(
+                        painter = painterResource(id = R.drawable.humiditycolor),
                         contentDescription = "Humidity",
-                        modifier = Modifier.size(25.dp).padding(end=7.dp))
+                        modifier = Modifier
+                            .size(25.dp)
+                            .padding(end = 7.dp)
+                    )
 
                     Text(
                         "Humidity: ",
@@ -204,21 +229,31 @@ fun CurrentForecast()
                 Row(verticalAlignment = Alignment.CenterVertically)
                 {
 
-                    Image(painter = painterResource(id = R.drawable.uvcolor),
+                    Image(
+                        painter = painterResource(id = R.drawable.uvcolor),
                         contentDescription = "UV",
-                        modifier = Modifier.size(25.dp).padding(end=7.dp))
+                        modifier = Modifier
+                            .size(25.dp)
+                            .padding(end = 7.dp)
+                    )
 
-                    Text("UV: ",
+                    Text(
+                        "UV: ",
                         fontSize = 20.sp,
-                        color = Color.White)
+                        color = Color.White
+                    )
                 }
 
                 Row(verticalAlignment = Alignment.CenterVertically)
                 {
 
-                    Image(painter = painterResource(id = R.drawable.rainy),
+                    Image(
+                        painter = painterResource(id = R.drawable.rainy),
                         contentDescription = "Rain",
-                        modifier = Modifier.size(25.dp).padding(end=7.dp))
+                        modifier = Modifier
+                            .size(25.dp)
+                            .padding(end = 7.dp)
+                    )
 
                     Text(
                         "Rain: ",
@@ -227,59 +262,79 @@ fun CurrentForecast()
                     )
                 }
 
-                Row(verticalAlignment = Alignment.CenterVertically){
+                Row(verticalAlignment = Alignment.CenterVertically) {
 
-                    Image(painter = painterResource(id = R.drawable.snowflake),
-                        contentDescription = "Snow",
-                        modifier = Modifier.size(25.dp)
-                            .padding(end=7.dp))
+                    // THIS LOGIC IS REDUNDANT NOT SURE IF I WANT TO COMPLETELY HIDE THE SNOW
+                        Image(
+                            painter = painterResource(id = R.drawable.snowflake),
+                            contentDescription = "Snow",
+                            modifier = Modifier
+                                .size(25.dp)
+                                .padding(end = 7.dp)
+                        )
 
-                    Text("Snow: ",
-                        fontSize = 20.sp,
-                        color = Color.White)
+                        Text(
+                            "Snow: ",
+                            fontSize = 20.sp,
+                            color = Color.White
+                        )
                 }
 
             }
 
-            Column(horizontalAlignment = Alignment.End, modifier = Modifier
-                .weight(1f)
-                .padding(end = 10.dp)) {
-                Text("${currentWeather.wind}km/h ${currentWeather.windDirection}",
+            Column(
+                horizontalAlignment = Alignment.End, modifier = Modifier
+                    .weight(1f)
+                    .padding(end = 10.dp)
+            ) {
+                Text(
+                    "${currentWeather.wind}km/h ${currentWeather.windDirection}",
                     fontSize = 20.sp,
-                    color = Color.White)
+                    color = Color.White
+                )
 
-                Text("${currentWeather.humidity}%",
+                Text(
+                    "${currentWeather.humidity}%",
                     fontSize = 20.sp,
-                    color = Color.White)
+                    color = Color.White
+                )
 
-                Text(currentWeather.uvIndex,
+                Text(
+                    currentWeather.uvIndex,
                     fontSize = 20.sp,
-                    color = Color.White)
+                    color = Color.White
+                )
 
                 // if there's a chance of rain it'll display both chance and amount. otherwise just 0%
                 if (currentWeather.chanceOfRain != 0) {
-                    Text("${currentWeather.chanceOfRain}% - ${currentWeather.amountOfRain}mm",
+                    Text(
+                        "${currentWeather.chanceOfRain}% - ${currentWeather.amountOfRain}mm",
                         fontSize = 20.sp,
-                        color = Color.White)
+                        color = Color.White
+                    )
                 } else {
-                    Text("0%",
+                    Text(
+                        "0%",
                         fontSize = 20.sp,
-                        color = Color.White)
+                        color = Color.White
+                    )
                 }
 
                 if (currentWeather.chanceOfSnow != 0) {
-                    Text("${currentWeather.chanceOfSnow}% - ${currentWeather.amountOfSnow}cm",
+                    Text(
+                        "${currentWeather.chanceOfSnow}% - ${currentWeather.amountOfSnow}cm",
                         fontSize = 20.sp,
-                        color = Color.White)
+                        color = Color.White
+                    )
                 } else {
                     Text("0%",
                         fontSize = 20.sp,
                         color = Color.White)
                 }
 
+                }
             }
-        }
 
+        }
     }
 
-}

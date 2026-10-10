@@ -1,7 +1,11 @@
 package com.example.weatherapp.ui
 
 
+import androidx.compose.foundation.Image
+import com.example.weatherapp.R
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.ViewWeek
@@ -20,14 +24,21 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.weatherapp.ui.screens.CurrentForecast
 import com.example.weatherapp.ui.screens.Forecast
+import com.example.weatherapp.ui.theme.LightBlue40
 import com.example.weatherapp.ui.theme.fontNunito
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -39,7 +50,7 @@ fun Navigation() {
 
 
     Scaffold(
-//        containerColor = Color.Transparent,
+        containerColor = Color.White,
         topBar = {
             TopAppBar(
                 colors = topAppBarColors(
@@ -62,9 +73,21 @@ fun Navigation() {
             {
                 // NavigationBarItem()
                 NavigationBarItem(
-                    icon = { Icon(imageVector = Icons.Default.Home, contentDescription = "Search") },
-                    label = { Text("Today", fontFamily = fontNunito) },
+                    icon = {
+                        Image(
+                            painter = painterResource(id = R.drawable.hometransparent),
+                            contentDescription = "Home",
+                            modifier = Modifier.size(50.dp)
+                        )
+                    },
+                    label = { Text("Today", fontFamily = fontNunito, fontSize = 15.sp, fontWeight = FontWeight.Bold) },
                     selected = selectedIndex == 0,
+                    // Source - https://stackoverflow.com/questions/74487632/how-to-remove-selected-oval-item-color-in-bottombar-jetpack-compose
+                    colors = androidx.compose.material3.NavigationBarItemDefaults
+                        .colors(
+                            selectedIconColor = LightBlue40,
+                            indicatorColor = LightBlue40.copy(0.25f)
+                        ),
                     onClick = {
                         selectedIndex = 0
                         navController.navigate(route="today"){
@@ -78,9 +101,21 @@ fun Navigation() {
                 )
 
                 NavigationBarItem(
-                    icon = { Icon(imageVector = Icons.Default.ViewWeek, contentDescription = "Search") },
-                    label = { Text("Week", fontFamily = fontNunito) },
+                    icon = {
+                        Image(
+                            painter = painterResource(id = R.drawable.weektransparenttwo),
+                            contentDescription = "Week",
+                            modifier = Modifier.size(50.dp)
+                        )
+                    },
+                    label = { Text("Week", fontFamily = fontNunito, fontSize = 15.sp, fontWeight = FontWeight.Bold) },
                     selected = selectedIndex == 1,
+                    // Source - https://stackoverflow.com/questions/74487632/how-to-remove-selected-oval-item-color-in-bottombar-jetpack-compose
+                    colors = androidx.compose.material3.NavigationBarItemDefaults
+                        .colors(
+                            selectedIconColor = LightBlue40,
+                            indicatorColor = LightBlue40.copy(0.25f)
+                        ),
                     onClick = {
                         selectedIndex = 1
                         navController.navigate(route="week"){
@@ -89,6 +124,7 @@ fun Navigation() {
                             }
                             launchSingleTop = true
                             restoreState = true
+
 
                         }
                     }
