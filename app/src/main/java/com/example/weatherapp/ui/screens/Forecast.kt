@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.weatherapp.R
 import com.example.weatherapp.models.WeeklyForecast
+import com.example.weatherapp.ui.theme.LightBlue20
 import com.example.weatherapp.ui.theme.LightBlue40
 
 @Composable
@@ -139,8 +140,6 @@ fun Forecast()
         )
     )
 
-    // PUT LOCATION IN NAVBAR TOP
-
     LazyColumn(
         modifier = Modifier
             .background(color = Color.White)
@@ -150,10 +149,9 @@ fun Forecast()
     ) {
         items(forecastList) { forecastCard ->
 
-            Row( // this row is one card
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
-//                    .height(175.dp)
                     .padding(vertical = 10.dp)
                     .clip(RoundedCornerShape((10.dp)))
                     .background(color = LightBlue40)

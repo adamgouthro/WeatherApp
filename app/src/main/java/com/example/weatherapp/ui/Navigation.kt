@@ -30,6 +30,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.weatherapp.ui.screens.CurrentForecast
 import com.example.weatherapp.ui.screens.Forecast
+import com.example.weatherapp.ui.theme.LightBlue20
 import com.example.weatherapp.ui.theme.LightBlue40
 import com.example.weatherapp.ui.theme.fontNunito
 

@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.weatherapp.R
 import com.example.weatherapp.models.Weather
+import com.example.weatherapp.ui.theme.LightBlue20
 import com.example.weatherapp.ui.theme.LightBlue40
 import com.example.weatherapp.ui.theme.LightYellow40
 
@@ -63,7 +64,6 @@ fun CurrentForecast()
     )
 
     Column(modifier = Modifier
-//        .paint(painterResource(id = R.drawable.bgcold), contentScale = ContentScale.FillBounds)
         .background(color = Color.White)
         .padding(10.dp)
         .fillMaxSize()
@@ -96,8 +96,6 @@ fun CurrentForecast()
                 modifier = Modifier.size(200.dp)
             )
         }
-
-        // to make transparent for later .copy(alpha = 0.7f) example
 
         Column(
             modifier = Modifier
@@ -173,11 +171,10 @@ fun CurrentForecast()
             }
         }
 
-        // BOTTOM ROW TO HOLD LOTS OF INFO
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight() // <- Change to fillmaxheight if i remove the transparent bottom navbar
+                .fillMaxHeight()
                 .clip(RoundedCornerShape((10.dp)))
                 .background(color = LightBlue40)
                 .padding(vertical = 10.dp),
@@ -264,7 +261,6 @@ fun CurrentForecast()
 
                 Row(verticalAlignment = Alignment.CenterVertically) {
 
-                    // THIS LOGIC IS REDUNDANT NOT SURE IF I WANT TO COMPLETELY HIDE THE SNOW
                         Image(
                             painter = painterResource(id = R.drawable.snowflake),
                             contentDescription = "Snow",
@@ -305,7 +301,6 @@ fun CurrentForecast()
                     color = Color.White
                 )
 
-                // if there's a chance of rain it'll display both chance and amount. otherwise just 0%
                 if (currentWeather.chanceOfRain != 0) {
                     Text(
                         "${currentWeather.chanceOfRain}% - ${currentWeather.amountOfRain}mm",
